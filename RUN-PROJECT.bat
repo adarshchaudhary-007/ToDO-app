@@ -1,0 +1,13 @@
+@echo off
+echo Starting Elegant Todos Development Server...
+echo.
+cd /d "%~dp0"
+echo Installing dependencies...
+call npm install
+echo.
+echo Starting development server...
+call npm run dev
+echo.
+echo Server should be running at http://localhost:3000
+echo Press any key to exit...
+pause >nul
