@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   devIndicators: {
     position: 'bottom-right',
   },
-  serverExternalPackages: [],
+  serverExternalPackages: []
 };
 
 export default nextConfig;

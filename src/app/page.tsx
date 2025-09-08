@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import TodoForm from '@/components/TodoForm';
+import { useState, useEffect, useCallback } from 'react';
+// TodoForm is integrated directly in this file
 import TodoItem from '@/components/TodoItem';
 import TodoFilter from '@/components/TodoFilter';
 import { Todo, Priority } from '@/types/todo';
@@ -14,7 +14,7 @@ export default function Home() {
   const [sortBy, setSortBy] = useState<'createdAt' | 'priority' | 'dueDate'>('createdAt');
 
   // Fetch todos
-  const fetchTodos = async () => {
+  const fetchTodos = useCallback(async () => {
     try {
       setLoading(true);
       const params = new URLSearchParams({
@@ -32,11 +32,11 @@ export default function Home() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [filter, sortBy]);
 
   useEffect(() => {
     fetchTodos();
-  }, [filter, sortBy]);
+  }, [fetchTodos]);
 
   // Add new todo
   const handleAddTodo = async (title: string, priority: Priority, dueDate?: string) => {

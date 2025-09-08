@@ -20,7 +20,7 @@ export async function PUT(
       );
     }
 
-    const updateData: any = {};
+    const updateData: Record<string, string | boolean | Date | null> = {};
     
     if (title !== undefined) updateData.title = title;
     if (completed !== undefined) updateData.completed = completed;

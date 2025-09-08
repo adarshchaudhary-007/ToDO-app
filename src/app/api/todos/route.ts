@@ -18,7 +18,7 @@ export async function GET(request: NextRequest) {
       where = { completed: true };
     }
 
-    let todos = await prisma.todo.findMany({ where });
+    const todos = await prisma.todo.findMany({ where });
 
     // Custom sorting logic
     todos.sort((a, b) => {
