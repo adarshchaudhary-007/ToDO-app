@@ -4,6 +4,9 @@
 
 [build.environment]
   NODE_VERSION = "18"
+  DATABASE_URL = "postgresql://username:password@host:port/database_name"
+  NEXTAUTH_SECRET = "your-secret-key-here"
+  NODE_ENV = "production"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
