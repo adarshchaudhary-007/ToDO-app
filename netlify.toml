@@ -1,12 +1,22 @@
+# netlify.toml - updated to run Prisma migrations in production build
+# IMPORTANT: Do NOT store DATABASE_URL or NEXTAUTH_SECRET in this file.
+# Set DATABASE_URL, NEXTAUTH_SECRET, and any other secrets in Netlify UI environment variables.
+
 [build]
+  # Preview / default build (used for deploy previews and non-production contexts)
   command = "npm run build"
   publish = ".next"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "18"
-  DATABASE_URL = "postgresql://username:password@host:port/database_name"
-  NEXTAUTH_SECRET = "your-secret-key-here"
   NODE_ENV = "production"
+
+# Production-specific build: run prisma generate & migrations before building
+[context.production.build]
+  command = "npx prisma generate && npx prisma migrate deploy && npm run build"
+  publish = ".next"
+  functions = "netlify/functions"
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
